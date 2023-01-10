@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "taskboard-31092": {
+      "hosting": {
+        "taskboard": [
+          "taskboard-31092"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "taskboard-31092"
+  }
+}

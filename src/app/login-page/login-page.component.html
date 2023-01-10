@@ -1,0 +1,28 @@
+<div>
+    <form #loginForm="ngForm" (submit)="onFormSubmitted()">
+        <mat-card align="center">
+            <div>
+                <mat-card-title>Sign in</mat-card-title>
+            </div>
+            <br>
+            <mat-card-content>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Login</mat-label>
+                        <input name="email" type="email" matInput [(ngModel)]="this.email" #emailBox="ngModel" email required>
+                        <mat-hint [hidden]="emailBox.valid || emailBox.pristine">'{{this.email}}' is not a valid e-mail.</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input name="password" type="password" [(ngModel)]="this.password" matInput required>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">GO</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

@@ -1,0 +1,32 @@
+* {
+    margin: 5px;
+}
+
+h1 {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.search-header {
+    display: flex;
+    align-items: flex-start;
+}
+.search-header > input {
+    flex: 1;
+    min-height: 3em;
+}
+.search-header > mat-form-field {
+    flex: 1;
+}
+
+.tasks-area {
+    display: flex;
+}
+
+mat-card {
+    flex-basis: 20%;
+}
+
+mat-card-content {
+    height: 2em;
+}

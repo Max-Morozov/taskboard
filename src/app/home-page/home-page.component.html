@@ -1,0 +1,34 @@
+<app-toolbar-main></app-toolbar-main>
+<h1>TASKS</h1>
+<div class="search-header">
+    <input matInput matNativeControl type="search" id ="searchField" name="searchField" 
+        [(ngModel)]="this.searchPhrase" placeholder="Enter something to search">
+    <mat-form-field appearance="fill">
+        <mat-label>Select task size</mat-label>
+        <mat-select name="sizeSelect" [(ngModel)]="this.selectedSize">
+            <mat-option value="">Any</mat-option>
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="13">13</mat-option>
+            <mat-option value="21">21</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div class="tasks-area">
+    <mat-card *ngFor="let t of this.tasks | filter:this.searchPhrase:this.selectedSize">
+        <mat-card-header>
+            <mat-card-title>{{t.title}}</mat-card-title>
+            <mat-card-subtitle>Storypoints: {{t.points}}</mat-card-subtitle>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+            <p>{{t.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add to library</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
