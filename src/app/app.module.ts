@@ -9,6 +9,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ToolbarMainComponent } from './toolbar-main/toolbar-main.component';
 import { FilterPipe } from './pipes/filter-pipe';
+import { TextFilterPipe } from './pipes/text-filter-pipe';
+import { UserFilterPipe } from './pipes/user-filter-pipe';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,6 +20,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -33,6 +37,8 @@ import { FriendsPageComponent } from './friends-page/friends-page.component';
     HomePageComponent,
     ToolbarMainComponent,
     FilterPipe,
+    TextFilterPipe,
+    UserFilterPipe,
     FriendsPageComponent
   ],
   imports: [
@@ -48,6 +54,8 @@ import { FriendsPageComponent } from './friends-page/friends-page.component';
     MatToolbarModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatIconModule,
+    MatSliderModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

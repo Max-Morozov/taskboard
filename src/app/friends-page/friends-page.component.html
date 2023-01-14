@@ -1,1 +1,21 @@
-<p>friends-page works!</p>
+<app-toolbar-main></app-toolbar-main>
+<h1>FRIENDS</h1>
+<div class="search-header">
+    <input matInput matNativeControl type="search" id ="searchField" name="searchField" 
+    [(ngModel)]="this.searchPhrase" placeholder="Enter username to search">
+</div>
+<div class="friends-area">
+    <mat-card *ngFor="let buddy of this.allBuddies | userFilter:this.searchPhrase">
+        <mat-card-content>
+            <div>
+                <mat-icon fontIcon="face"></mat-icon>
+                <strong>{{buddy.user.username}}, {{buddy.user.age}} years</strong>
+            </div>
+            <cite>"{{buddy.user.status}}"</cite>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" *ngIf="!buddy.isFriend" (click)="this.addFriend(buddy)">Add to friends</button>
+            <button mat-raised-button color="warn" *ngIf="buddy.isFriend" (click)="this.removeFriend(buddy)">Remove friend</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

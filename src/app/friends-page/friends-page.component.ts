@@ -13,6 +13,7 @@ export class FriendsPageComponent implements OnInit {
   currentUserId: string;
   myFriendsIds: string[] = [];
   allBuddies: Buddy[] = [];
+  searchPhrase: string = '';
 
   constructor(private fireService: FirebaseStoreService,
     private snackBar: MatSnackBar) {
@@ -20,32 +21,39 @@ export class FriendsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initMyFriends();
     this.initBuddies();
   }
 
-  initBuddies() {
-    let allUsers: User[] = [];
-    this.fireService.getUsers()
-      .subscribe(users => allUsers = users.filter(u => u.id !== this.currentUserId));
-
+  initMyFriends() {
     this.fireService.getCurrentUser(this.currentUserId)
-      .subscribe(u => {
-        if (u) this.myFriendsIds = u.friends;
-      });
+    .subscribe(u => {
+      if (u) this.myFriendsIds = u.friends;
+    });
+  }
 
-    this.allBuddies = allUsers.map(u => new Buddy(u, this.myFriendsIds.includes(u.id)));
+  initBuddies() {
+    this.fireService.getUsers()
+      .subscribe(users => {
+        if (this.allBuddies.length != 0)
+          return;
+
+        let allUsers: User[] = users.filter(u => u.id !== this.currentUserId);
+        this.allBuddies = allUsers.map(u => new Buddy(u, this.myFriendsIds.includes(u.id)));
+      });
   }
 
   addFriend(buddy: Buddy) {
     if (buddy.isFriend)
       return;
 
-    let updatedFriendIds: string[] = Object.assign([], this.myFriendsIds);
-    updatedFriendIds.push(buddy.user.id);
-    this.fireService.updateFriends(this.currentUserId, updatedFriendIds)
+    let updatedFriendsIds: string[] = Object.assign([], this.myFriendsIds);
+    updatedFriendsIds.push(buddy.user.id);
+    this.fireService.updateFriends(this.currentUserId, updatedFriendsIds)
       .then(() => {
-        this.myFriendsIds = updatedFriendIds;
+        this.myFriendsIds = updatedFriendsIds;
         buddy.isFriend = true;
+        this.resort();
       })
       .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
   }
@@ -54,18 +62,23 @@ export class FriendsPageComponent implements OnInit {
     if (!buddy.isFriend)
       return;
 
-    let updatedFriendIds: string[] = Object.assign([], this.myFriendsIds);
-    let targetIndex: number = updatedFriendIds.indexOf(buddy.user.id);
+    let updatedFriendsIds: string[] = Object.assign([], this.myFriendsIds);
+    let targetIndex: number = updatedFriendsIds.indexOf(buddy.user.id);
     if (targetIndex < 0)
       return;
 
-    updatedFriendIds.splice(targetIndex, 1);
-    this.fireService.updateFriends(this.currentUserId, updatedFriendIds)
+    updatedFriendsIds.splice(targetIndex, 1);
+    this.fireService.updateFriends(this.currentUserId, updatedFriendsIds)
       .then(() => {
-        this.myFriendsIds = updatedFriendIds;
+        this.myFriendsIds = updatedFriendsIds;
         buddy.isFriend = false;
+        this.resort();
       })
       .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+  }
+
+  resort() {
+    this.allBuddies.sort((a, b) => Number(b.isFriend) - Number(a.isFriend));
   }
 }
 

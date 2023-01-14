@@ -1,0 +1,42 @@
+* {
+    margin: 5px;
+}
+
+h1 {
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.search-header {
+    width: 80%;
+    display: flex;
+}
+#searchField {
+    min-height: 3em;
+    flex: 1;
+}
+
+.friends-area {
+    width: 80%;
+}
+
+mat-card {
+    display: flex;
+    flex-direction: row;
+    border-width: 2px;
+    border-color: gray;
+    margin-top: 10px;
+}
+
+mat-card > mat-card-content {
+    flex: 6;
+    padding: 0px;
+}
+
+mat-icon {
+    margin: 0px;
+}
+
+mat-card > mat-card-actions {
+    flex: 1
+}
