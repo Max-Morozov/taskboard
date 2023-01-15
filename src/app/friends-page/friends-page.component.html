@@ -4,6 +4,7 @@
     <input matInput matNativeControl type="search" id ="searchField" name="searchField" 
     [(ngModel)]="this.searchPhrase" placeholder="Enter username to search">
 </div>
+<mat-divider></mat-divider>
 <div class="friends-area">
     <mat-card *ngFor="let buddy of this.allBuddies | userFilter:this.searchPhrase">
         <mat-card-content>

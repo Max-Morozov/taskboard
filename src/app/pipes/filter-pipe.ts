@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Task } from '../models/task';
 
 @Pipe({
-    name: 'filter'
+    name: 'taskFilter'
 })
 export class FilterPipe implements PipeTransform {
     transform(value: Task[], textFilter: string, sizeFilter: string) {

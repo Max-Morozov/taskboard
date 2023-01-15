@@ -22,6 +22,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -29,6 +30,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FriendsPageComponent } from './friends-page/friends-page.component';
+import { LibraryPageComponent } from './library-page/library-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { FriendsPageComponent } from './friends-page/friends-page.component';
     FilterPipe,
     TextFilterPipe,
     UserFilterPipe,
-    FriendsPageComponent
+    FriendsPageComponent,
+    LibraryPageComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { FriendsPageComponent } from './friends-page/friends-page.component';
     MatSelectModule,
     MatIconModule,
     MatSliderModule,
+    MatDividerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

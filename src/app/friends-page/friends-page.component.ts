@@ -40,6 +40,7 @@ export class FriendsPageComponent implements OnInit {
 
         let allUsers: User[] = users.filter(u => u.id !== this.currentUserId);
         this.allBuddies = allUsers.map(u => new Buddy(u, this.myFriendsIds.includes(u.id)));
+        this.resort();
       });
   }
 

@@ -29,8 +29,8 @@ export class FirebaseStoreService {
     return this.store.collection<User>(this.usersRoot).doc(userId).update({ friends: friends });
   }
 
-  updateTasks(userId: string, tasks: string[]) {
-    this.store.collection<User>(this.usersRoot).doc(userId).update({ tasks: tasks });
+  updateTasks(userId: string, tasks: string[]): Promise<void> {
+    return this.store.collection<User>(this.usersRoot).doc(userId).update({ tasks: tasks });
   }
 
   updateProfile(userId: string, age: number, status: string) {

@@ -18,7 +18,7 @@
     </mat-form-field>
 </div>
 <div class="tasks-area">
-    <mat-card *ngFor="let t of this.tasks | filter:this.searchPhrase:this.selectedSize">
+    <mat-card *ngFor="let t of this.tasks | taskFilter:this.searchPhrase:this.selectedSize">
         <mat-card-header>
             <mat-card-title>{{t.title}}</mat-card-title>
             <mat-card-subtitle>Storypoints: {{t.points}}</mat-card-subtitle>
@@ -28,7 +28,7 @@
             <p>{{t.description}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary">Add to library</button>
+            <button mat-raised-button color="primary" (click)="this.addToLibrary(t)">Add to library</button>
         </mat-card-actions>
     </mat-card>
 </div>

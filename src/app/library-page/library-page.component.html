@@ -1,0 +1,17 @@
+<app-toolbar-main></app-toolbar-main>
+<h1>MY TASKS</h1>
+<div class="tasks-area">
+    <mat-card *ngFor="let t of this.tasks">
+        <mat-card-header>
+            <mat-card-title>{{t.title}}</mat-card-title>
+            <mat-card-subtitle>Storypoints: {{t.points}}</mat-card-subtitle>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+            <p>{{t.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="warn" (click)="this.remove(t)">Remove from library</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

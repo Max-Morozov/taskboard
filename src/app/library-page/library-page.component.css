@@ -7,25 +7,13 @@ h1 {
     font-weight: 500;
 }
 
-.search-header {
-    display: flex;
-    align-items: flex-start;
-}
-.search-header > input {
-    flex: 4;
-    min-height: 3em;
-}
-.search-header > mat-form-field {
-    flex: 1;
-}
-
 .tasks-area {
     display: flex;
     flex-wrap: wrap;
 }
 
 mat-card {
-    width: 20%;
+    flex-basis: 20%;
     border-width: 2px;
     border-color: gray;
 }
