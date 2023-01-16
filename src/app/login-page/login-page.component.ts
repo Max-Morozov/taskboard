@@ -20,18 +20,16 @@ export class LoginPageComponent {
   onFormSubmitted() {
     if (this.email && this.password) {
       let hash = sha256(this.password);
-      this.fireService.getUsers()
-        .subscribe(users => {
-          let user = users.find(u => u.email === this.email && u.password === hash);
-          if (user) {
-            localStorage.setItem('userId', user.id);
-            this.router.navigate(['home']);
-          }
-          else {
-            console.log('login fail');
-            this.alert.showCustomError('Invalid login or password.');
-          }
-        });
+      this.fireService.getUsers(users => {
+        let user = users.find(u => u.email === this.email && u.password === hash);
+        if (user) {
+          localStorage.setItem('userId', user.id);
+          this.router.navigate(['home']);
+        }
+        else {
+          this.alert.showCustomError('Invalid login or password.');
+        }
+      });
     }
   }
 }

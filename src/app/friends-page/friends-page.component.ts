@@ -33,15 +33,11 @@ export class FriendsPageComponent implements OnInit {
   }
 
   initBuddies() {
-    this.fireService.getUsers()
-      .subscribe(users => {
-        if (this.allBuddies.length != 0)
-          return;
-
-        let allUsers: User[] = users.filter(u => u.id !== this.currentUserId);
-        this.allBuddies = allUsers.map(u => new Buddy(u, this.myFriendsIds.includes(u.id)));
-        this.resort();
-      });
+    this.fireService.getUsers(users => {
+      let allUsers: User[] = users.filter(u => u.id !== this.currentUserId);
+      this.allBuddies = allUsers.map(u => new Buddy(u, this.myFriendsIds.includes(u.id)));
+      this.resort();
+    });
   }
 
   addFriend(buddy: Buddy) {
@@ -51,6 +47,7 @@ export class FriendsPageComponent implements OnInit {
     let newFriendId: string = buddy.user.id;
     let updatedFriendsIds: string[] = Object.assign([], this.myFriendsIds);
     updatedFriendsIds.push(newFriendId);
+    console.log(this.allBuddies);
     this.fireService.updateFriends(this.currentUserId, updatedFriendsIds)
       .then(() => {
         this.fireService.addFriend(newFriendId, this.currentUserId)
