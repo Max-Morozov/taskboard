@@ -1,0 +1,13 @@
+* {
+    margin: 5px;
+}
+
+mat-card {
+    border-width: 2px;
+    border-color: gray;
+}
+
+mat-card-content {
+    height: 2em;
+    max-height: 2em;
+}

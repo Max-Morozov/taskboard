@@ -32,6 +32,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { FriendsPageComponent } from './friends-page/friends-page.component';
 import { LibraryPageComponent } from './library-page/library-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     FriendsPageComponent,
     LibraryPageComponent,
     ProfilePageComponent,
-    AgeValidatorDirective
+    AgeValidatorDirective,
+    TaskDetailsComponent
   ],
   imports: [
     BrowserModule,

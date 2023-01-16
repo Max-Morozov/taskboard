@@ -16,7 +16,7 @@ h1 {
     align-items: flex-start;
 }
 .search-header > input {
-    flex: 4;
+    flex: 5;
     min-height: 3em;
 }
 .search-header > mat-form-field {
@@ -28,12 +28,6 @@ h1 {
     flex-wrap: wrap;
 }
 
-mat-card {
-    width: 20%;
-    border-width: 2px;
-    border-color: gray;
-}
-
-mat-card-content {
-    height: 2em;
+app-task-details {
+    flex-basis: 20%;
 }

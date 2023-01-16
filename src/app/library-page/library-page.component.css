@@ -16,12 +16,6 @@ h1 {
     flex-wrap: wrap;
 }
 
-mat-card {
+app-task-details {
     flex-basis: 20%;
-    border-width: 2px;
-    border-color: gray;
-}
-
-mat-card-content {
-    height: 2em;
 }

@@ -2,17 +2,7 @@
 <h1>MY TASKS</h1>
 <p id="emptyPlaceHolder" *ngIf="this.tasks.length === 0">You can add your first task to library on 'Tasks' page.</p>
 <div class="tasks-area">
-    <mat-card *ngFor="let t of this.tasks">
-        <mat-card-header>
-            <mat-card-title>{{t.title}}</mat-card-title>
-            <mat-card-subtitle>Storypoints: {{t.points}}</mat-card-subtitle>
-        </mat-card-header>
-        <hr>
-        <mat-card-content>
-            <p>{{t.description}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="warn" (click)="this.remove(t)">Remove from library</button>
-        </mat-card-actions>
-    </mat-card>
+    <app-task-details *ngFor="let t of this.tasks" 
+        [task]="t" [libraryView]="true" (removeFromLibrary)="this.remove($event)">
+    </app-task-details>
 </div>
