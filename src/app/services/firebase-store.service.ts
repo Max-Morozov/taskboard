@@ -33,7 +33,7 @@ export class FirebaseStoreService {
     return this.store.collection<User>(this.usersRoot).doc(userId).update({ tasks: tasks });
   }
 
-  updateProfile(userId: string, age: number, status: string) {
-    this.store.collection<User>(this.usersRoot).doc(userId).update({ age: age, status: status });
+  updateProfile(userId: string, age: number, status: string): Promise<void> {
+    return this.store.collection<User>(this.usersRoot).doc(userId).update({ age: age, status: status });
   }
 }

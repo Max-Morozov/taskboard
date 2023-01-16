@@ -11,6 +11,7 @@ import { ToolbarMainComponent } from './toolbar-main/toolbar-main.component';
 import { FilterPipe } from './pipes/filter-pipe';
 import { TextFilterPipe } from './pipes/text-filter-pipe';
 import { UserFilterPipe } from './pipes/user-filter-pipe';
+import { AgeValidatorDirective } from './directives/valid-age';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -44,7 +45,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     UserFilterPipe,
     FriendsPageComponent,
     LibraryPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    AgeValidatorDirective
   ],
   imports: [
     BrowserModule,
