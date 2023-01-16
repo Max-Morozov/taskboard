@@ -8,7 +8,6 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@an
 export class AgeValidatorDirective implements Validator {
     validate(control: AbstractControl): ValidationErrors | null {
         let ageEntered: number = control.value;
-        console.log('ddd');
         return ageEntered < 12 || ageEntered > 123 ? {invalidAge: {value: control.value}} : null;
     }
 }

@@ -17,6 +17,7 @@
         </mat-select>
     </mat-form-field>
 </div>
+<p id="emptyPlaceHolder" *ngIf="this.tasks.length === 0">All tasks have been already added to library.</p>
 <div class="tasks-area">
     <mat-card *ngFor="let t of this.tasks | taskFilter:this.searchPhrase:this.selectedSize">
         <mat-card-header>

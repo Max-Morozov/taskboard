@@ -1,5 +1,6 @@
 <app-toolbar-main></app-toolbar-main>
 <h1>MY TASKS</h1>
+<p id="emptyPlaceHolder" *ngIf="this.tasks.length === 0">You can add your first task to library on 'Tasks' page.</p>
 <div class="tasks-area">
     <mat-card *ngFor="let t of this.tasks">
         <mat-card-header>
