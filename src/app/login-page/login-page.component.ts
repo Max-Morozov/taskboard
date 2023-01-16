@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseStoreService } from '../services/firebase-store.service';
 import { Router } from '@angular/router';
 import { sha256 } from 'js-sha256';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +15,7 @@ export class LoginPageComponent {
 
   constructor(private fireService: FirebaseStoreService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private alert: NotificationService) { }
 
   onFormSubmitted() {
     if (this.email && this.password) {
@@ -27,7 +27,10 @@ export class LoginPageComponent {
             localStorage.setItem('userId', user.id);
             this.router.navigate(['home']);
           }
-          else this.snackBar.open('Invalid login or password.', 'Okay :(');
+          else {
+            console.log('login fail');
+            this.alert.showCustomError('Invalid login or password.');
+          }
         });
     }
   }

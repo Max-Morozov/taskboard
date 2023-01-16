@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from '../models/task';
 import { FirebaseStoreService } from '../services/firebase-store.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-library-page',
@@ -13,7 +13,7 @@ export class LibraryPageComponent {
   tasks: Task[] = [];
   
   constructor(private fireService: FirebaseStoreService,
-    private snackBar: MatSnackBar) {
+    private alert: NotificationService) {
     this.currentUserId = localStorage.getItem('userId')!;
   }
 
@@ -39,6 +39,6 @@ export class LibraryPageComponent {
       .then(() => {
         this.tasks = updatedTasks;
       })
-      .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+      .catch(error => this.alert.showError(error));
   }
 }

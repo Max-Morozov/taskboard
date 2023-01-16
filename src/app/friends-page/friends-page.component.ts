@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Buddy } from '../models/buddy';
 import { FirebaseStoreService } from '../services/firebase-store.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-friends-page',
@@ -16,7 +16,7 @@ export class FriendsPageComponent implements OnInit {
   searchPhrase: string = '';
 
   constructor(private fireService: FirebaseStoreService,
-    private snackBar: MatSnackBar) {
+    private alert: NotificationService) {
     this.currentUserId = localStorage.getItem('userId')!;
   }
 
@@ -48,34 +48,42 @@ export class FriendsPageComponent implements OnInit {
     if (buddy.isFriend)
       return;
 
+    let newFriendId: string = buddy.user.id;
     let updatedFriendsIds: string[] = Object.assign([], this.myFriendsIds);
-    updatedFriendsIds.push(buddy.user.id);
+    updatedFriendsIds.push(newFriendId);
     this.fireService.updateFriends(this.currentUserId, updatedFriendsIds)
       .then(() => {
-        this.myFriendsIds = updatedFriendsIds;
-        buddy.isFriend = true;
-        this.resort();
+        this.fireService.addFriend(newFriendId, this.currentUserId)
+          .then(() => {
+            this.myFriendsIds = updatedFriendsIds;
+            buddy.isFriend = true;
+            this.resort();
+          })
       })
-      .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+      .catch(error => this.alert.showError(error));
   }
   
   removeFriend(buddy: Buddy) {
     if (!buddy.isFriend)
       return;
 
+    let oldFriendId: string = buddy.user.id;
     let updatedFriendsIds: string[] = Object.assign([], this.myFriendsIds);
-    let targetIndex: number = updatedFriendsIds.indexOf(buddy.user.id);
+    let targetIndex: number = updatedFriendsIds.indexOf(oldFriendId);
     if (targetIndex < 0)
       return;
 
     updatedFriendsIds.splice(targetIndex, 1);
     this.fireService.updateFriends(this.currentUserId, updatedFriendsIds)
       .then(() => {
-        this.myFriendsIds = updatedFriendsIds;
-        buddy.isFriend = false;
-        this.resort();
+        this.fireService.removeFriend(oldFriendId, this.currentUserId)
+          .then(() => {
+            this.myFriendsIds = updatedFriendsIds;
+            buddy.isFriend = false;
+            this.resort();
+        })
       })
-      .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+      .catch(error => this.alert.showError(error));
   }
 
   resort() {

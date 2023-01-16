@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from '../models/task';
 import { FirebaseStoreService } from '../services/firebase-store.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   selectedSize = '';
 
   constructor(private fireService: FirebaseStoreService,
-    private snackBar: MatSnackBar) {
+    private alert: NotificationService) {
     this.currentUserId = localStorage.getItem('userId')!;
   }
 
@@ -41,7 +41,13 @@ export class HomePageComponent implements OnInit {
       .then(() => {
         this.usersTasksIds = updatedTasksIds;
         this.tasks.splice(this.tasks.indexOf(task), 1);
+        this.clearFilters();
       })
-      .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+      .catch(error => this.alert.showError(error));
+  }
+
+  clearFilters() {
+    if (this.selectedSize) this.selectedSize = '';
+    if (this.searchPhrase) this.searchPhrase = '';
   }
 }

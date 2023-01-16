@@ -13,7 +13,7 @@
                         <mat-label>Age</mat-label>
                         <input name="age" type="number" matInput [(ngModel)]="this.age" #ageBox="ngModel" required validAge>
                         <mat-hint [hidden]="ageBox.valid || ageBox.pristine">
-                            Allowed ages range: from 12 to 123.
+                            Allowed age range: from 12 to 123.
                         </mat-hint>
                     </mat-form-field>
                 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { FirebaseStoreService } from '../services/firebase-store.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,7 +15,7 @@ export class ProfilePageComponent implements OnInit {
   status: string = '';
 
   constructor(private fireService: FirebaseStoreService,
-    private snackBar: MatSnackBar) {
+    private alert: NotificationService) {
       this.currentUserId = localStorage.getItem('userId')!;
     }
 
@@ -32,7 +32,7 @@ export class ProfilePageComponent implements OnInit {
 
   onSaved() {
     this.fireService.updateProfile(this.currentUserId, this.age, this.status)
-      .then(() => this.snackBar.open('Update is successfull!', undefined, { duration: 3000 }))
-      .catch(error => this.snackBar.open(`Error occured: ${error}`, 'Okay :('));
+      .then(() => this.alert.showSuccess('Update performed successfully'))
+      .catch(error => this.alert.showError(error));
   }
 }
