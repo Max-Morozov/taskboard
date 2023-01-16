@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FirebaseStoreService } from '../services/firebase-store.service';
 import { Router } from '@angular/router';
 import { sha256 } from 'js-sha256';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogMessageComponent } from '../dialog-message/dialog-message.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,7 +15,6 @@ export class LoginPageComponent {
 
   constructor(private fireService: FirebaseStoreService,
     private router: Router,
-    private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
   onFormSubmitted() {
@@ -33,14 +30,5 @@ export class LoginPageComponent {
           else this.snackBar.open('Invalid login or password.', 'Okay :(');
         });
     }
-  }
-
-  openFailDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      title: 'Auth failed',
-      text: 'Invalid login or password.'
-    };
-    this.dialog.open(DialogMessageComponent, dialogConfig);
   }
 }
